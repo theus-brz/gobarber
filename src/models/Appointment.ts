@@ -9,7 +9,7 @@ import {
   JoinColumn,
 } from 'typeorm';
 
-import User from './User';
+import { User } from './User';
 
 /**
  * Um para Um (OneToOne)

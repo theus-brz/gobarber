@@ -10,7 +10,7 @@ import {
 // KISS - Keep It Simple & Stupid
 
 @Entity('users')
-class User {
+export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -23,11 +23,12 @@ class User {
   @Column()
   password: string;
 
+  @Column()
+  avatar: string;
+
   @CreateDateColumn()
   created_at: Date;
 
   @UpdateDateColumn()
   updated_at: Date;
 }
-
-export default User;
