@@ -1,5 +1,6 @@
 import { getRepository } from 'typeorm';
 import { compare } from 'bcryptjs';
+import { sign } from 'jsonwebtoken';
 
 import User from '../models/User';
 
@@ -12,6 +13,7 @@ type PartialUser = Partial<User>;
 
 interface Response {
   user: PartialUser;
+  token: string;
 }
 
 class AuthenticateUserService {
@@ -32,7 +34,12 @@ class AuthenticateUserService {
       throw new Error('Incorrect email/password combination.');
     }
 
-    return { user };
+    const token = sign({}, '53ea9255193c3572d4b62ca1e6872bd0', {
+      subject: user.id,
+      expiresIn: '1d',
+    });
+
+    return { user, token };
   }
 }
 
